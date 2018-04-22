@@ -1,6 +1,5 @@
 $(document).ready(() => {
     $('.alert').hide();
-    console.log('What up!');
     loadProducts();
 
     $('#add-product').submit(e => {
@@ -25,12 +24,10 @@ function loadProducts() {
     $.ajax({
         url: '/products.json',
         type: 'GET',
-        success: data => {
-            renderProductTable(data);
-        },
-        error: data => {
-            console.log(data);
-        }
+    }).done(data => {
+        renderProductTable(data);
+    }).fail(data => {
+        displayAlert('alert-danger', 'We are sorry there was a problem.')
     });
 }
 
@@ -44,15 +41,13 @@ function createProduct(e) {
     $.ajax({
         url: '/products.json',
         type: 'POST',
-        data: {product: postData},
-        success: data => {
-            renderProductTable([data]);
-            $('#add-product')[0].reset();
-            displayAlert('alert-success', 'Product Created!')
-        },
-        error: data => {
-            console.log(data);
-        }
+        data: {product: postData}
+    }).done(data => {
+        renderProductTable([data]);
+        $('#add-product')[0].reset();
+        displayAlert('alert-success', 'Product Created!')
+    }).fail(data => {
+        displayAlert('alert-danger', 'We are sorry there was a problem.')
     });
 }
 
@@ -76,15 +71,12 @@ function renderProductTable(products) {
 function destroy(product_id, el) {
     $.ajax({
         url: `/products/${product_id}.json`,
-        type: 'DELETE',
-        success: data => {
-            $(el).closest("tr").remove();
-            displayAlert('alert-success', 'Product Deleted!')
-        },
-        error: data => {
-            console.log(data);
-            displayAlert('alert-danger', 'We are sorry there was a problem.')
-        }
+        type: 'DELETE'
+    }).done(data => {
+        $(el).closest("tr").remove();
+        displayAlert('alert-success', 'Product Deleted!')
+    }).fail(data => {
+        displayAlert('alert-danger', 'We are sorry there was a problem.')
     });
 }
 
@@ -94,5 +86,5 @@ function displayAlert(klass, message) {
     setTimeout( () => {
         $('.alert').removeClass(klass);
     }, 4000);
-    $("body").scrollTop(10);
+    $("html,body").animate({ scrollTop: 0 }, "slow");
 }
