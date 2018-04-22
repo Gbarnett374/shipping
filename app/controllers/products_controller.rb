@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_product, only: [:show, :update, :destroy]
 
   # GET /products.json
@@ -13,6 +14,7 @@ class ProductsController < ApplicationController
   end
 
   # POST /products.json
+   # http POST localhost:3000/products.json product:='{"width":20, "height": 20, "weight": 20, "length": 20, "name": "Greg", "type": "golf"}'
   def create
     @product = Product.new(product_params)
 
