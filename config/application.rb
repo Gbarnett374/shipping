@@ -27,6 +27,6 @@ module ShipSticks
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-    config.api_only = true
+    config.api_only = false
   end
 end
