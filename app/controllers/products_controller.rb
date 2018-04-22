@@ -16,7 +16,6 @@ class ProductsController < ApplicationController
   # http get localhost:3000/products/22/22/22/22.json
   # GET /products/:length/:width/:height/:weight.json
   def search
-    # binding.pry
     searchable_fields = ['length', 'width', 'height', 'weight' ]
     @search_values = params.select { |k| searchable_fields.include?(k) }.values.map(&:to_i)
     @product = Product.find_correct_container(*@search_values)
