@@ -26,8 +26,6 @@ $(document).on('click', '.delete', function(e) {
 $(document).on('click', '.edit', function (e) {
     let productId = $(this).data('id');
     loadProduct(productId);
-    $('#edit-modal').modal('toggle');
-
 });
 // ********
 
@@ -37,8 +35,9 @@ function loadProduct(productId) {
         type: 'GET'
     }).done(data => {
         populateModalForm(data);
+        $('#edit-modal').modal('toggle');
     }).fail((jqXHR, textStatus, errorThrown) => {
-
+        displayAlert('alert-danger', 'We are sorry there was a problem.')
     });
 }
 
