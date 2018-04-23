@@ -23,3 +23,9 @@
     * `CURL -X PATCH localhost:3000/products/5ade4ce331085928d5bda177.json -d "product[name]=suitcase" -d "product[type]=luggage" -d "product[length]=22" -d "product[width]=4" -d "product[height]=7" -d "product[weight]=29"`
 * `# DELETE /products/:id.json => ProductController#destory`
     * `CURL -X DELETE localhost:3000/products/5ade4ce331085928d5bda177.json`
+
+
+````# PATCH/PUT /products/:id.json => ProductsController#update
+    CURL -X PATCH localhost:3000/products/5ade4ce331085928d5bda177.json -d "product[name]=suitcase" -d "product[type]=luggage" -d "product[length]=22" -d "product[width]=4" -d "product[height]=7" -d "product[weight]=29"
+    # DELETE /products/:id.json => ProductController#destory`
+    CURL -X DELETE localhost:3000/products/5ade4ce331085928d5bda177.json````
