@@ -4,10 +4,11 @@
 1. Make sure MongoDB is installed and running. 
 2. Run `bundle install`. 
 3. Seed the database run `rails r scripts/seed.rb`.
-4. Start the Server: `rails s`.
-5. To run tests: `rspec`.
-6. To view the admin dashboard go to `localhost:3000/admin`.
-7. To view the calculator go to `localhost:3000/calculator`.
+4. Seed the test database `RAILS_ENV=test rails r scripts/seed.rb`.
+5. Start the Server: `rails s`.
+6. To run tests: `rspec`.
+7. To view the admin dashboard go to `localhost:3000/admin`.
+8. To view the calculator go to `localhost:3000/calculator`.
 
 ## API Endpoints 
 - Here are all the API endpoints with example CURL commands. 
@@ -28,6 +29,6 @@ CURL -X POST localhost:3000/products.json -d "product[name]=suitcase" -d "produc
 # PATCH/PUT /products/:id.json => ProductsController#update
 CURL -X PATCH localhost:3000/products/5ade4ce331085928d5bda177.json -d "product[name]=suitcase" -d "product[type]=luggage" -d "product[length]=22" -d "product[width]=4" -d "product[height]=7" -d "product[weight]=29"
 
-# DELETE /products/:id.json => ProductController#destory`
+# DELETE /products/:id.json => ProductController#destory
 CURL -X DELETE localhost:3000/products/5ade4ce331085928d5bda177.json
 ````

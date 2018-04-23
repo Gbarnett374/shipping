@@ -17,7 +17,7 @@ class Product
   def self.find_correct_container(l,w,h,lbs)
     # Product.any_of({:length.gte => params[:length]}, {:height.gte => params[:length]})
     # @products = Product.where(:length.gte => params[:length]).where(:width.gte => params[:width])
-    self.where(:weight.gte => lbs).order_by('weight asc, length asc').each do |product|
+    self.where(:weight.gte => lbs).order_by('length asc, height asc, width asc, weight asc,').each do |product|
       if product.length >= l && product.width >= w && product.height >= h 
         return product
       elsif product.length >= h && product.width >= w && product.height >= l 
