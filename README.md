@@ -11,14 +11,14 @@
 
 ## API Endpoints 
 - Here are all the API endpoints with example CURL commands. 
-1. `# GET /products.json => ProductsController#index`
+- `# GET /products.json => ProductsController#index`
 `CURL localhost:3000/products`
-2. `# GET /products/:id.json => ProductsController#show`
+- `# GET /products/:id.json => ProductsController#show`
 `CURL localhost:3000/products/5add19e63108592d4dced32b.json`
-3. `# GET /products/:length/:width/:height/:weight.json => ProductsController#search` `CURL localhost:3000/products/22/2/22/22.json`
-4. `# POST /products.json => ProductsController#create`
+- `# GET /products/:length/:width/:height/:weight.json => ProductsController#search` `CURL localhost:3000/products/22/2/22/22.json`
+- `# POST /products.json => ProductsController#create`
 `CURL -X POST localhost:3000/products.json -d "product[name]=suitcase" -d "product[type]=luggage" -d "product[length]=22" -d "product[width]=4" -d "product[height]=7" -d "product[weight]=22"` 
-5. `# PATCH/PUT /products/:id.json => ProductsController#update`
+- `# PATCH/PUT /products/:id.json => ProductsController#update`
 `CURL -X PATCH localhost:3000/products/5ade4ce331085928d5bda177.json -d "product[name]=suitcase" -d "product[type]=luggage" -d "product[length]=22" -d "product[width]=4" -d "product[height]=7" -d "product[weight]=29"`
-6. `# DELETE /products/:id.json => ProductController#destory`
+- `# DELETE /products/:id.json => ProductController#destory`
 `CURL -X DELETE localhost:3000/products/5ade4ce331085928d5bda177.json`
