@@ -18,6 +18,11 @@ $(document).ready(() => {
             type: 'GET'
         }).done(data => {
             $('#search-results').text(`Your Result: ${data.name}`);
+            setTimeout(() => {
+                $('#jumbotron-search-results').text(`Your Result: ${data.name}`);
+                $('#calculator-modal').modal('toggle');
+                $('#calculator-form')[0].reset();
+            }, 5000);
             console.log(data);
         }).fail((jqXHR, textStatus, errorThrown) => {
             $('#search-results').text('Sorry there was no results.');
