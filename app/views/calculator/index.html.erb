@@ -1,17 +1,109 @@
 <%= render 'navbar' %>
 <div class="jumbotron ">
     <h1 class="display-4">Welcome to Ship Sticks!</h1>
-    <p class="lead">At Ship Sticks, we make getting your golf clubs to and from your destination easier than it’s ever been – allowing you to enjoy a hassle-free travel experience to anywhere in the world.</p>
+    <p class="lead">
+        Ship Sticks offers door-to-door service worldwide at up to 60% less than major logistics providers. 
+        Start experiencing hassle-free travel today!
+    </p>
     <hr class="my-4">
     <p>Click the below to find the packaging that best fits your needs.</p>
     <p class="lead">
-        <a class="btn btn-success btn-lg" href="#" role="button">Calculator</a>
+        <button id="calculator-btn" class="btn btn-success btn-lg">Calculator</button>
     </p>
 </div>
-<div style="margin-top: -30px;" class="card bg-dark text-white">
-  <img class="card-img" src ='https://cdn.shipsticks.com/assets/v4/about/aboutUsHeaderImage-c434e360ec0110aec0d83fdc0613df0e.png' alt="Card image">
+<div class="container">
+    <div class="col-md-12 text-center">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>How Ship Sticks works</h2>
+                <p>At Ship Sticks, we make getting your golf clubs to and from your destination easier 
+                than it’s ever been – allowing you to enjoy a hassle-free travel experience to anywhere in the world.</p>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-sm-3 col-md-3">
+                    <img src="//cdn.shipsticks.com/assets/v5/sticks/shipsticks_icon_step1-3f4d1b41c1ca4fba86835f2ef8c87d55.svg"/>
+                    <span>
+                        <strong>1. Schedule online</strong>
+                    </span>
+                    <div>Schedule your shipment using our Ship Page</div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <img src="//cdn.shipsticks.com/assets/v5/sticks/shipsticks_icon_step2-045083cdf1af68955d761d14f67854ad.svg"/>
+                    <span>
+                        <strong>2. Print &amp; attach</strong> 
+                    </span>
+                    <div>Print &amp; attach your shipping labels to the correct bags</div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <img src="//cdn.shipsticks.com/assets/v5/sticks/shipsticks_icon_step3-966b6993bf8e890286aea1deee36843d.svg"/>
+                    <span>
+                        <strong>3. Pickup or dropoff</strong>
+                    </span>
+                    <div>
+                        Drop off bags or allow them to be picked up
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <img src="//cdn.shipsticks.com/assets/v5/sticks/shipsticks_icon_step4-117627dadddc7cdb4d60f3573ccc2b1b.svg"/>
+                    <span>
+                        <strong>4. Enjoy</strong>
+                    </span>
+                    <div>
+                        Finally, enjoy your on-time golf bag arrival
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="card bg-dark text-white">
+  <img class="card-img" src="https://cdn.shipsticks.com/assets/v4/about/aboutUsHeaderImage-c434e360ec0110aec0d83fdc0613df0e.png">
   <div class="card-img-overlay">
-    <h5 class="card-title">Easiest way to ship your golf clubs & luggage anywhere in the world!</h5>
-    <p class="card-text"> Instead of lugging your clubs through the airport and risking lost or damaged items, ship your clubs with Ship Sticks.</p>
+    <h5 class="card-title">Easiest way to ship your golf clubs &amp; luggage anywhere in the world!</h5>
+    <p class="card-text"> 
+        U.S. Airlines collected over $2.5 billion in baggage fees in 2014.
+        Instead of lugging your clubs through the airport and risking lost or damaged items, ship your clubs with Ship Sticks.
+    </p>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="calculator-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Find a product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="calculator-form">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <label for="length">Length</label>
+                        <input type="text" class="form-control" name="length" placeholder="Enter Length">
+                    </div>
+                    <div class="col">
+                        <label for="width">Width</label>
+                        <input type="text" class="form-control" name="width" placeholder="Enter Width">
+                    </div>
+                    <div class="col">
+                        <label for="height">Height</label>
+                        <input type="text" class="form-control" name="height" placeholder="Enter Height">
+                    </div>
+                    <div class="col">
+                        <label for="weight">Weight</label>
+                        <input type="text" class="form-control" name="weight" placeholder="Enter Weight">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Search</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
