@@ -25,14 +25,12 @@ $(document).on('click', '.delete', function(e) {
 
 $(document).on('click', '.edit', function (e) {
     let productId = $(this).data('id');
-    // console.log($(this));
-    // let row = $(this).closest("tr");
-    // console.log(row.find("td"));
     loadProduct(productId);
     $('#edit-modal').modal('toggle');
 
 });
 // ********
+
 function loadProduct(productId) {
     $.ajax({
         url: `/products/${productId}.json`,
@@ -118,7 +116,9 @@ function updateProduct(productData, productId) {
         $(`.edit[data-id=${productId }]`).parent().parent().replaceWith(row);
         displayAlert('alert-success', 'Product Updated!')
     }).fail((jqXHR, textStatus, errorThrown) => {
-
+        // Todo: make the notification appear in modal.
+        displayAlert('alert-danger', 'We are sorry there was a problem.')
+        $('#edit-modal').modal('toggle');
     });
 }
 
