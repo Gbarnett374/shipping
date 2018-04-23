@@ -1,10 +1,19 @@
 $(document).ready(() => {
+    $('#edit-modal').find("form").attr('id', 'edit-product');
     $('.alert').hide();
     loadProducts();
 
     $('#add-product').submit(e => {
         e.preventDefault();
-        createProduct();
+        let productData = parseFormData('#add-product');
+        createProduct(productData);
+    });
+
+    $('#edit-product').submit(e => {
+        e.preventDefault();
+        let productId = $('#edit-product').data('id');
+        let productData = parseFormData('#edit-product');
+        updateProduct(productData, productId)
     });
 });
 // Need these for delete & edit events since we are building the table via ajax.
@@ -15,45 +24,54 @@ $(document).on('click', '.delete', function(e) {
 });
 
 $(document).on('click', '.edit', function (e) {
-    let id = $(this).data('id');
-    $('#my-modal').modal('toggle')
+    let productId = $(this).data('id');
+    // console.log($(this));
+    // let row = $(this).closest("tr");
+    // console.log(row.find("td"));
+    loadProduct(productId);
+    $('#edit-modal').modal('toggle');
+
 });
 // ********
+function loadProduct(productId) {
+    $.ajax({
+        url: `/products/${productId}.json`,
+        type: 'GET'
+    }).done(data => {
+        populateModalForm(data);
+    }).fail((jqXHR, textStatus, errorThrown) => {
+
+    });
+}
 
 function loadProducts() {
     $.ajax({
         url: '/products.json',
-        type: 'GET',
+        type: 'GET'
     }).done(data => {
         renderProductTable(data);
-    }).fail(data => {
+    }).fail( (jqXHR, textStatus, errorThrown) => {
         displayAlert('alert-danger', 'We are sorry there was a problem.')
     });
 }
 
-function createProduct(e) {
-    let formData = $('#add-product').serializeArray();
-    let postData = {};
-    formData.forEach((field) => {
-        postData[field.name] = field.value
-    });
-
+function createProduct(productData) {
     $.ajax({
         url: '/products.json',
         type: 'POST',
-        data: {product: postData}
+        data: {product: productData}
     }).done(data => {
         renderProductTable([data]);
         $('#add-product')[0].reset();
         displayAlert('alert-success', 'Product Created!')
-    }).fail(data => {
+    }).fail((jqXHR, textStatus, errorThrown) => {
         displayAlert('alert-danger', 'We are sorry there was a problem.')
     });
 }
 
 function renderProductTable(products) {
     let html = '';
-    products.forEach( (v, k) => {
+    products.forEach((v) => {
         html += '<tr>';
         html += `<td>${v.name}</td>`
         html += `<td>${v.type}</td>`
@@ -68,14 +86,14 @@ function renderProductTable(products) {
     $('#product-table > tbody:last-child').append(html);
 }
 
-function destroy(product_id, el) {
+function destroy(productId, el) {
     $.ajax({
-        url: `/products/${product_id}.json`,
+        url: `/products/${productId}.json`,
         type: 'DELETE'
     }).done(data => {
         $(el).closest("tr").remove();
         displayAlert('alert-success', 'Product Deleted!')
-    }).fail(data => {
+    }).fail((jqXHR, textStatus, errorThrown) => {
         displayAlert('alert-danger', 'We are sorry there was a problem.')
     });
 }
@@ -87,4 +105,35 @@ function displayAlert(klass, message) {
         $('.alert').removeClass(klass);
     }, 4000);
     $("html,body").animate({ scrollTop: 0 }, "slow");
+}
+
+function populateModalForm(productData) {
+    $.each(productData, (k, v) => {
+        if (k == '_id') {
+            $('#edit-product').data('id', v.$oid);
+        } else {
+            $(`#edit-product :input[name=${k}]`).val(v);
+        }
+    });
+}
+
+function updateProduct(productData, productId) {
+    $.ajax({
+        url: `/products/${productId}.json`,
+        type: 'PATCH',
+        data: {product: productData}
+    }).done(data => {
+        $('#edit-modal').modal('toggle');
+        alert('saved!');
+    }).fail((jqXHR, textStatus, errorThrown) => {
+
+    });
+}
+
+function parseFormData(id) {
+    let formData = {};
+    $(id).serializeArray().forEach(field => {
+        formData[field.name] = field.value
+    });
+    return formData;
 }
