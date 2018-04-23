@@ -14,14 +14,13 @@ class Product
   validates :height, numericality: { only_integer: true }
   validates :weight, numericality: { only_integer: true }
 
-  def self.find_correct_container(l,w,h,lbs)
-    # Product.any_of({:length.gte => params[:length]}, {:height.gte => params[:length]})
-    # @products = Product.where(:length.gte => params[:length]).where(:width.gte => params[:width])
-    self.where(:weight.gte => lbs).order_by('length asc, height asc, width asc, weight asc,').each do |product|
+  def self.find_correct_container(l, w, h, lbs)
+    products = self.where(:weight.gte => lbs).order_by('length asc, height asc, width asc, weight asc')
+    products.each do |product|
       if product.length >= l && product.width >= w && product.height >= h 
         return product
       elsif product.length >= h && product.width >= w && product.height >= l 
-        # rotate item and see if it will fit in the box. 
+        # rotate item by switching length and height, see if it will fit in the box. 
         return product
       end
     end
