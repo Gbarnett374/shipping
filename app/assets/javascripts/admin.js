@@ -16,7 +16,7 @@ $(document).on('click', '.delete', function(e) {
 
 $(document).on('click', '.edit', function (e) {
     let id = $(this).data('id');
-    alert(id);
+    $('#my-modal').modal('toggle')
 });
 // ********
 
