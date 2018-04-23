@@ -25,7 +25,6 @@ $(document).ready(() => {
                 $('#calculator-modal').modal('toggle');
                 $('#calculator-form')[0].reset();
             }, 5000);
-            console.log(data);
         }).fail((jqXHR, textStatus, errorThrown) => {
             $('#search-results').addClass('text-danger');
             $('#search-results').text('Sorry there was no results.');
