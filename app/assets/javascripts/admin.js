@@ -59,7 +59,7 @@ function createProduct(productData) {
     $.ajax({
         url: '/products.json',
         type: 'POST',
-        data: {product: productData}
+        data: { product: productData }
     }).done(data => {
         renderProductTable([data]);
         $('#add-product')[0].reset();
@@ -71,18 +71,7 @@ function createProduct(productData) {
 
 function renderProductTable(products) {
     let html = '';
-    products.forEach((v) => {
-        html += '<tr>';
-        html += `<td>${v.name}</td>`
-        html += `<td>${v.type}</td>`
-        html += `<td>${v.length}</td>`
-        html += `<td>${v.width}</td>`
-        html += `<td>${v.height}</td>`
-        html += `<td>${v.weight}</td>`
-        html += `<td><button data-id=${v._id.$oid} class="edit btn btn-small btn-info">Edit</button></td>`
-        html += `<td><button data-id=${v._id.$oid} class="delete btn btn-small btn-danger">Delete</button></td>`
-        html += '</tr>';
-    });
+    products.forEach(v => html += renderRow(v));
     $('#product-table > tbody:last-child').append(html);
 }
 
@@ -121,10 +110,13 @@ function updateProduct(productData, productId) {
     $.ajax({
         url: `/products/${productId}.json`,
         type: 'PATCH',
-        data: {product: productData}
+        data: { product: productData }
     }).done(data => {
         $('#edit-modal').modal('toggle');
-        alert('saved!');
+        productData._id = { $oid: productId };
+        let row = renderRow(productData)
+        $(`.edit[data-id=${productId }]`).parent().parent().replaceWith(row);
+        displayAlert('alert-success', 'Product Updated!')
     }).fail((jqXHR, textStatus, errorThrown) => {
 
     });
@@ -136,4 +128,18 @@ function parseFormData(id) {
         formData[field.name] = field.value
     });
     return formData;
+}
+
+function renderRow(product) {
+   let html = '<tr>';
+    html += `<td>${product.name}</td>`
+    html += `<td>${product.type}</td>`
+    html += `<td>${product.length}</td>`
+    html += `<td>${product.width}</td>`
+    html += `<td>${product.height}</td>`
+    html += `<td>${product.weight}</td>`
+    html += `<td><button data-id=${product._id.$oid} class="edit btn btn-small btn-info">Edit</button></td>`
+    html += `<td><button data-id=${product._id.$oid} class="delete btn btn-small btn-danger">Delete</button></td>`
+    html += '</tr>';
+    return html;
 }
