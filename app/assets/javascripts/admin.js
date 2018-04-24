@@ -13,7 +13,7 @@ $(document).ready(() => {
         e.preventDefault();
         let productId = $('#edit-product').data('id');
         let productData = parseFormData('#edit-product');
-        updateProduct(productData, productId)
+        updateProduct(productData, productId);
     });
 });
 // Need these for delete & edit events since we are building the table via ajax.
@@ -37,7 +37,7 @@ function loadProduct(productId) {
         populateModalForm(data);
         $('#edit-modal').modal('toggle');
     }).fail((jqXHR, textStatus, errorThrown) => {
-        displayAlert('alert-danger', 'We are sorry there was a problem.')
+        displayAlert('alert-danger', 'We are sorry there was a problem.');
     });
 }
 
@@ -48,7 +48,7 @@ function loadProducts() {
     }).done(data => {
         renderProductTable(data);
     }).fail( (jqXHR, textStatus, errorThrown) => {
-        displayAlert('alert-danger', 'We are sorry there was a problem.')
+        displayAlert('alert-danger', 'We are sorry there was a problem.');
     });
 }
 
@@ -60,9 +60,9 @@ function createProduct(productData) {
     }).done(data => {
         renderProductTable([data]);
         $('#add-product')[0].reset();
-        displayAlert('alert-success', 'Product Created!')
+        displayAlert('alert-success', 'Product Created!');
     }).fail((jqXHR, textStatus, errorThrown) => {
-        displayAlert('alert-danger', 'We are sorry there was a problem.')
+        displayAlert('alert-danger', 'We are sorry there was a problem.');
     });
 }
 
@@ -78,9 +78,9 @@ function destroy(productId, el) {
         type: 'DELETE'
     }).done(data => {
         $(el).closest("tr").remove();
-        displayAlert('alert-success', 'Product Deleted!')
+        displayAlert('alert-success', 'Product Deleted!');
     }).fail((jqXHR, textStatus, errorThrown) => {
-        displayAlert('alert-danger', 'We are sorry there was a problem.')
+        displayAlert('alert-danger', 'We are sorry there was a problem.');
     });
 }
 
@@ -111,12 +111,11 @@ function updateProduct(productData, productId) {
     }).done(data => {
         $('#edit-modal').modal('toggle');
         productData._id = { $oid: productId };
-        let row = renderRow(productData)
+        let row = renderRow(productData);
         $(`.edit[data-id=${productId }]`).parent().parent().replaceWith(row);
-        displayAlert('alert-success', 'Product Updated!')
+        displayAlert('alert-success', 'Product Updated!');
     }).fail((jqXHR, textStatus, errorThrown) => {
-        // Todo: make the notification appear in modal.
-        displayAlert('alert-danger', 'We are sorry there was a problem.')
+        displayAlert('alert-danger', 'We are sorry there was a problem.');
         $('#edit-modal').modal('toggle');
     });
 }
@@ -124,21 +123,21 @@ function updateProduct(productData, productId) {
 function parseFormData(id) {
     let formData = {};
     $(id).serializeArray().forEach(field => {
-        formData[field.name] = field.value
+        formData[field.name] = field.value;
     });
     return formData;
 }
 
 function renderRow(product) {
    let html = '<tr>';
-    html += `<td>${product.name}</td>`
-    html += `<td>${product.type}</td>`
-    html += `<td>${product.length}</td>`
-    html += `<td>${product.width}</td>`
-    html += `<td>${product.height}</td>`
-    html += `<td>${product.weight}</td>`
-    html += `<td><button data-id=${product._id.$oid} class="edit btn btn-small btn-info">Edit</button></td>`
-    html += `<td><button data-id=${product._id.$oid} class="delete btn btn-small btn-danger">Delete</button></td>`
+    html += `<td>${product.name}</td>`;
+    html += `<td>${product.type}</td>`;
+    html += `<td>${product.length}</td>`;
+    html += `<td>${product.width}</td>`;
+    html += `<td>${product.height}</td>`;
+    html += `<td>${product.weight}</td>`;
+    html += `<td><button data-id=${product._id.$oid} class="edit btn btn-small btn-info">Edit</button></td>`;
+    html += `<td><button data-id=${product._id.$oid} class="delete btn btn-small btn-danger">Delete</button></td>`;
     html += '</tr>';
     return html;
 }

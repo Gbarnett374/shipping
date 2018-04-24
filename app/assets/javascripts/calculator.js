@@ -7,9 +7,9 @@ $(document).ready(() => {
         e.preventDefault();
         let formData = {};
         $('#calculator-form').serializeArray().forEach(field => {
-            formData[field.name] = field.value
+            formData[field.name] = field.value;
         });
-        let url = `/products/${formData.length}/${formData.width}`
+        let url = `/products/${formData.length}/${formData.width}`;
         url+= `/${formData.height}`;
         url+= `/${formData.weight}.json `;
 
